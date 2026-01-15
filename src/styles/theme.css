@@ -1,0 +1,77 @@
+:root {
+  /* Base */
+  --bg-black: #0b0b0a;
+  --bg-black-soft: #12110f;
+
+  /* Ouro */
+  --gold-primary: #c9a227;
+  --gold-soft: #9e8424;
+  --gold-dark: #6f5b1a;
+
+  /* Texto */
+  --text-primary: #f2f0eb;
+  --text-muted: #a8a59a;
+  --text-dim: #6f6c63;
+
+  /* Bordas */
+  --border-gold: rgba(201, 162, 39, 0.35);
+  --border-soft: rgba(255, 255, 255, 0.08);
+
+  /* Camadas */
+  --glass-bg: rgba(18, 17, 15, 0.65);
+  --glass-border: rgba(201, 162, 39, 0.25);
+
+  /* Sombras */
+  --shadow-deep: 0 40px 80px rgba(0, 0, 0, 0.6);
+  
+  /* Fontes */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+  
+  /* Adicione também uma fonte alternativa para códigos */
+  --font-code: "JetBrains Mono", monospace;
+}
+
+button {
+  background: transparent;
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-primary);
+  padding: 14px 36px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgba(201, 162, 39, 0.12);
+}
+
+button.primary {
+  background: var(--gold-primary);
+  color: #0b0b0a;
+  border: none;
+}
+
+button.primary:hover {
+  background: var(--gold-soft);
+}
+
+h1 {
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+p {
+  line-height: 1.6;
+}
+
+::selection {
+  background: rgba(201, 162, 39, 0.25);
+}
