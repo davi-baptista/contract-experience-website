@@ -43,7 +43,10 @@ export default function Invite({ onNext }: Props) {
           newArr[3] = true
           return newArr
         })
-        setButtonEnabled(true)
+        // Botão ativa 0.5s após a última frase
+        setTimeout(() => {
+          setButtonEnabled(true)
+        }, 1200)
       }, 4400)
     ]
 
@@ -217,7 +220,7 @@ export default function Invite({ onNext }: Props) {
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: '100%' }}
-          transition={{ duration: 1.5, delay: 2 }}
+          transition={{ duration: 1.5, delay: 5 }}
           style={{
             height: 1,
             background: `linear-gradient(90deg, transparent, var(--gold-primary), transparent)`,
@@ -225,44 +228,43 @@ export default function Invite({ onNext }: Props) {
           }}
         />
 
-        {/* Botão dourado */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: buttonEnabled ? 1 : 0.5, scale: 1 }}
-          transition={{ delay: 4, duration: 0.8 }}
-        >
-          <motion.button
-            onClick={handleClick}
-            disabled={!buttonEnabled}
-            whileHover={buttonEnabled ? { 
-              scale: 1.05,
-              boxShadow: '0 0 30px var(--gold-primary)'
-            } : {}}
-            whileTap={buttonEnabled ? { scale: 0.98 } : {}}
-            style={{
-              marginTop: 20,
-              padding: '18px 40px',
-              fontSize: '1.1rem',
-              background: buttonEnabled 
-                ? 'linear-gradient(135deg, var(--bg-black-soft), var(--bg-black), var(--bg-black-soft))' 
-                : 'var(--bg-black-soft)',
-              color: buttonEnabled ? 'var(--gold-primary)' : 'var(--text-dim)',
-              border: buttonEnabled 
-                ? '2px solid var(--gold-primary)' 
-                : '2px solid var(--text-dim)',
-              borderRadius: '8px',
-              cursor: buttonEnabled ? 'pointer' : 'not-allowed',
-              position: 'relative',
-              overflow: 'hidden',
-              fontFamily: 'var(--font-body)',
-              letterSpacing: '1.5px',
-              fontWeight: 500,
-              textTransform: 'uppercase',
-              transition: 'all 0.3s ease'
+        {/* Botão dourado - SÓ APARECE QUANDO PRONTO */}
+        {buttonEnabled && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              y: 0
             }}
+            transition={{ duration: 0.8 }}
           >
-            {/* Efeito de brilho dourado no botão */}
-            {buttonEnabled && (
+            <motion.button
+              onClick={handleClick}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: '0 0 30px var(--gold-primary)'
+              }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                marginTop: 20,
+                padding: '18px 40px',
+                fontSize: '1.1rem',
+                background: 'linear-gradient(135deg, var(--bg-black-soft), var(--bg-black), var(--bg-black-soft))',
+                color: 'var(--gold-primary)',
+                border: '2px solid var(--gold-primary)',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden',
+                fontFamily: 'var(--font-body)',
+                letterSpacing: '1.5px',
+                fontWeight: 500,
+                textTransform: 'uppercase',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {/* Efeito de brilho dourado no botão */}
               <motion.div
                 animate={{
                   x: ['-100%', '200%']
@@ -282,50 +284,35 @@ export default function Invite({ onNext }: Props) {
                   pointerEvents: 'none'
                 }}
               />
-            )}
-            
-            <span style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              gap: 12,
-              position: 'relative',
-              zIndex: 1
-            }}>
-              {buttonEnabled ? (
-                <>
-                  <motion.span
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    style={{ fontSize: '1.3rem' }}
-                  >
-                    💎
-                  </motion.span>
-                  ACEITAR CONVITE
-                  <span style={{ fontSize: '1.3rem', opacity: 0.7 }}>→</span>
-                </>
-              ) : (
-                <>
-                  <motion.span
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    style={{ fontSize: '1.2rem' }}
-                  >
-                    ⏳
-                  </motion.span>
-                  PROCESSANDO...
-                </>
-              )}
-            </span>
-          </motion.button>
-        </motion.div>
+              
+              <span style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                gap: 12,
+                position: 'relative',
+                zIndex: 1
+              }}>
+                <motion.span
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  style={{ fontSize: '1.3rem' }}
+                >
+                  💎
+                </motion.span>
+                ACEITAR CONVITE
+                <span style={{ fontSize: '1.3rem', opacity: 0.7 }}>→</span>
+              </span>
+            </motion.button>
+          </motion.div>
+        )}
 
         {/* Texto de instrução sutil em dourado */}
         {buttonEnabled && (
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.6 }}
-            transition={{ delay: 5, duration: 1 }}
+            transition={{ delay: 1, duration: 1 }}
             style={{
               fontSize: '0.9rem',
               marginTop: 25,
