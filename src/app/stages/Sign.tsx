@@ -41,18 +41,6 @@ export default function Sign({ onConfirm, onCancel }: Props) {
     }
   }, [name, step])
 
-  // Mostra warning após delay quando começar a digitar
-  useEffect(() => {
-    if (name.length === 1) {
-      const warningTimer = setTimeout(() => {
-        setShowWarning(true)
-      }, 800)
-      return () => clearTimeout(warningTimer)
-    } else if (name.length === 0) {
-      setShowWarning(false)
-    }
-  }, [name.length])
-
   const handleNameChange = (value: string) => {
     setName(value)
   }
@@ -247,9 +235,24 @@ export default function Sign({ onConfirm, onCancel }: Props) {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.8 }}
-              style={{ marginBottom: '40px', textAlign: 'left' }}
+              style={{ 
+                marginBottom: '40px', 
+                textAlign: 'left',
+                paddingLeft: '0',
+                paddingRight: '0',
+                marginLeft: '0',
+                marginRight: '0',
+                width: '100%'
+              }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '10px', 
+                marginBottom: '10px',
+                paddingLeft: '0',
+                paddingRight: '0'
+              }}>
                 <div style={{
                   width: '8px',
                   height: '8px',
@@ -273,6 +276,10 @@ export default function Sign({ onConfirm, onCancel }: Props) {
               <motion.div
                 animate={shakeField ? { x: [0, -10, 10, -10, 10, 0] } : {}}
                 transition={{ duration: 0.5 }}
+                style={{
+                  width: '100%',
+                  display: 'flex'
+                }}
               >
                 <input
                   type="text"
@@ -293,44 +300,17 @@ export default function Sign({ onConfirm, onCancel }: Props) {
                     borderRadius: '4px',
                     fontFamily: 'var(--font-body)',
                     transition: 'all 0.3s ease',
-                    boxShadow: isFocused ? '0 0 0 1px var(--gold-primary)40' : 'none'
+                    boxShadow: isFocused ? '0 0 0 1px var(--gold-primary)40' : 'none',
+                    margin: '0',
+                    boxSizing: 'border-box',
+                    textAlign: 'center',
+                    letterSpacing: '0.5px',
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'none',
+                    appearance: 'none'
                   }}
                 />
               </motion.div>
-
-              <AnimatePresence>
-                {showWarning && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      marginTop: '12px',
-                      padding: '10px',
-                      background: 'var(--bg-black)80',
-                      borderRadius: '4px',
-                      borderLeft: '3px solid var(--gold-primary)'
-                    }}>
-                      <span style={{ color: 'var(--gold-primary)', fontSize: '14px' }}>⚠</span>
-                      <p style={{
-                        fontSize: '11px',
-                        color: 'var(--text-dim)',
-                        margin: 0,
-                        lineHeight: '1.5',
-                        fontFamily: 'var(--font-body)'
-                      }}>
-                        Sua assinatura será registrada permanentemente no sistema.
-                        Certifique-se de que está pronto para prosseguir.
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
