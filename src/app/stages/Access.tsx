@@ -297,36 +297,38 @@ export default function Access({ onReset }: Props) {
             opacity: 0.5
           }} />
 
-          {/* CABEÇALHO DO PLAYER */}
+          {/* CABEÇALHO DO PLAYER */}{/* CABEÇALHO DO PLAYER - REORGANIZADO */}
           <div style={{
-            display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'flex-start', // Mudado de 'center' para 'flex-start'
             marginBottom: '30px',
             paddingBottom: '20px',
             borderBottom: '1px solid var(--border-soft)'
           }}>
+            {/* TÍTULO VERTICAL */}
             <div>
               <div style={{
                 fontSize: '12px',
                 letterSpacing: '2px',
                 color: 'var(--gold-primary)',
-                marginBottom: '5px',
+                marginBottom: '8px', // Adicionado espaço entre as linhas
                 fontFamily: 'var(--font-mono)'
               }}>
                 TRANSMISSÃO EXCLUSIVA
               </div>
               <div style={{
-                fontSize: '18px',
+                fontSize: '22px', // Aumentado ligeiramente
                 fontWeight: 500,
                 color: 'var(--text-primary)',
                 letterSpacing: '1px',
-                fontFamily: 'var(--font-heading)'
+                fontFamily: 'var(--font-heading)',
+                lineHeight: '1.2' // Melhor espaçamento
               }}>
                 MENSAGEM DO DON
               </div>
             </div>
             
+            {/* BADGE CONFIDENCIAL */}
             <div style={{
               fontSize: '10px',
               color: 'var(--text-dim)',
@@ -335,7 +337,9 @@ export default function Access({ onReset }: Props) {
               border: '1px solid var(--border-soft)',
               borderRadius: '4px',
               background: 'var(--bg-black-soft)',
-              fontFamily: 'var(--font-mono)'
+              fontFamily: 'var(--font-mono)',
+              alignSelf: 'flex-start', // Alinha ao topo
+              marginTop: '5px' // Pequeno ajuste vertical
             }}>
               CONFIDENCIAL
             </div>
