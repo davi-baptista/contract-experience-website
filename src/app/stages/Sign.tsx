@@ -26,7 +26,7 @@ export default function Sign({ onConfirm, onCancel }: Props) {
   useEffect(() => {
     const introTimer = setTimeout(() => {
       setStep('input')
-    }, 1500)
+    }, 2000)
     
     return () => clearTimeout(introTimer)
   }, [])
