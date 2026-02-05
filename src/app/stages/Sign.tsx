@@ -41,6 +41,18 @@ export default function Sign({ onConfirm, onCancel }: Props) {
     }
   }, [name, step])
 
+  // Mostra warning após delay quando começar a digitar
+  useEffect(() => {
+    if (name.length === 1) {
+      const warningTimer = setTimeout(() => {
+        setShowWarning(true)
+      }, 800)
+      return () => clearTimeout(warningTimer)
+    } else if (name.length === 0) {
+      setShowWarning(false)
+    }
+  }, [name.length])
+
   const handleNameChange = (value: string) => {
     setName(value)
   }
@@ -311,6 +323,40 @@ export default function Sign({ onConfirm, onCancel }: Props) {
                   }}
                 />
               </motion.div>
+
+              <AnimatePresence>
+                {showWarning && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginTop: '12px',
+                      padding: '10px',
+                      background: 'var(--bg-black)80',
+                      borderRadius: '4px',
+                      borderLeft: '3px solid var(--gold-primary)'
+                    }}>
+                      <span style={{ color: 'var(--gold-primary)', fontSize: '14px' }}>⚠</span>
+                      <p style={{
+                        fontSize: '11px',
+                        color: 'var(--text-dim)',
+                        margin: 0,
+                        lineHeight: '1.5',
+                        fontFamily: 'var(--font-body)'
+                      }}>
+                        Sua assinatura será registrada permanentemente no sistema.
+                        Certifique-se de que está pronto para prosseguir.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
