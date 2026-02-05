@@ -610,7 +610,7 @@ export default function Access({ onReset }: Props) {
         {/* AUDIO HIDDEN */}
         <audio 
           ref={audioRef} 
-          src="/audio/previa.mp3" 
+          src="/audio/previa.wav" 
           preload="metadata"
         />
       </motion.div>
